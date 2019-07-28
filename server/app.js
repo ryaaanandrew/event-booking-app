@@ -3,4 +3,4 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 
-app.listen(4000, () => console.log('now '))
+app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
