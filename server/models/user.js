@@ -12,11 +12,11 @@ const userSchema = new Schema({
 		required: true
 	},
 	createdEvents: [
-	{
-		type: Schema.Types.ObjectId,
-		ref: "Event"
-		// creates ref to Event Schema in mongodb
-	}
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Event"
+			// creates ref to Event Schema in mongodb
+		}
 	]
 });
 
