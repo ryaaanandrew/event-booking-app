@@ -5,13 +5,8 @@ const mongoose = require('mongoose');
 
 const Event = require('./models/event');
 
-
 const app = express();
 const PORT = 4000;
-
-const mango = 'mongodb+srv://<username>:<password>@cluster0-8nozd.mongodb.net/test?retryWrites=true&w=majority'
-
-const events = [];
 
 app.use('/graphql', graphqlHTTP({
     schema: buildSchema(`
@@ -31,7 +26,7 @@ app.use('/graphql', graphqlHTTP({
         }
 
         type RootQuery {
-            events: [String!]!
+            events: [Event!]!
         }
 
         type RootMutation {
@@ -46,24 +41,30 @@ app.use('/graphql', graphqlHTTP({
     trueValue: {},
     rootValue: {
         events: () => {
-            return events
+           return Event.find()
+           .then(events => {
+               return events
+           })
+           .catch(err => {
+               throw err 
+           })
         },
         createEvent: (args) => {
-            // const event = {
-            //     _id: Math.random().toString(),
-            //     title: args.eventInput.title,
-            //     description: args.eventInput.description,
-            //     price: +args.eventInput.price,
-            //     date: args.eventInput.date
-            // }
             const event = new Event({
                 title: args.eventInput.title,
                 description: args.eventInput.description,
                 price: +args.eventInput.price,
                 date: new Date(args.eventInput.date)
             });
-            events.push(event);
-            return event;
+            return event
+                .save()
+                .then(result => {
+                    return {...result._doc};
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw err;
+                });
         }
     },
     graphiql: true
