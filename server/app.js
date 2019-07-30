@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const graphQLSchema = require('./graphql/schema');
 const graphQLResolvers = require('./graphql/resolvers');
+const isAuth = require('./middleware/is-auth');
 
 const app = express();
 const PORT = 4000;
