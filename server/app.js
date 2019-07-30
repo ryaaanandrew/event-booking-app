@@ -9,7 +9,7 @@ const isAuth = require('./middleware/is-auth');
 const app = express();
 const PORT = 4000;
 
-
+app.use(isAuth);
 
 app.use('/graphql', graphqlHTTP({
     schema: graphQLSchema,
