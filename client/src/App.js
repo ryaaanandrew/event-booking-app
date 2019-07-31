@@ -16,8 +16,8 @@ const App = () => {
     };
 
     const logout = () => {
-        token(null);
-        userId(null);
+        setToken(null);
+        setUserId(null);
     };
 
     return (
@@ -26,10 +26,12 @@ const App = () => {
             <Navigation/>
                 <main className='main-content'>
                     <Switch>
-                        <Redirect from='/' to='/auth' exact />
-                        <Route path='/auth' component={AuthPage} />
+                        {!token && <Redirect from='/' to='/auth' exact />}
+                        {token && <Redirect from='/' to='/events' exact />}
+                        {token && <Redirect from='/auth' to='/events' exact />}
+                        {!token && <Route path='/auth' component={AuthPage} />}
                         <Route path='/events' component={EventsPage} />
-                        <Route path='/bookings' component={BookingPage} />
+                        {token && <Route path='/bookings' component={BookingPage} />}
                     </Switch>
                 </main>
             </AuthContext.Provider>

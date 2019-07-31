@@ -16,6 +16,7 @@ const Navigation = () => (
                             <li><NavLink to='/events'>Events</NavLink></li>
                             {context.token && <li><NavLink to='/bookings'>Bookings</NavLink></li>}
                             {!context.token && <li><NavLink to='/auth'>Authenticate</NavLink></li>}
+                            {context.token && <li><button onClick={context.logout}>Log out</button></li>}
                         </ul>
                     </nav>
                 </header>
