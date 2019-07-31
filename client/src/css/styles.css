@@ -12,6 +12,30 @@
   justify-content: space-around;
   align-items: center; }
 
+.modal {
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  position: fixed;
+  top: 20vh;
+  left: 5%;
+  border: 1px solid red; }
+
+@media (min-width: 768px) {
+  .modal {
+    width: 60rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid blue; } }
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75); }
+
 * {
   padding: 0;
   margin: 0;

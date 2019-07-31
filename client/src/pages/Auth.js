@@ -5,6 +5,7 @@ class Auth extends Component {
     state = {
         isLogIn: true
     }
+    
     constructor(props) {
         super(props);
         this.emailEl = React.createRef();
@@ -61,10 +62,11 @@ class Auth extends Component {
             return res.json();
         })
         .then(resData => {
+            console.log(resData)
             if(resData.data.login.token) {
                 this.context.login(
-                    resData.data.login.token,
                     resData.data.login.userId,
+                    resData.data.login.token,
                     resData.data.login.tokenExpiration
                 );
             };
