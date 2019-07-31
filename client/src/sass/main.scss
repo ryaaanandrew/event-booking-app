@@ -1,3 +1,5 @@
+@import "./form";
+
 * {
     padding: 0;
     margin: 0;
@@ -11,6 +13,10 @@ html {
 
 ul li {
     list-style-type: none;
+}
+
+.main-content {
+    height: 90vh;
 }
 
 .main-navigation {
