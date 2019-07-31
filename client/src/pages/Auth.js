@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AuthContext from '../context/auth-context';
 
 class Auth extends Component {
     state = {
@@ -9,6 +10,8 @@ class Auth extends Component {
         this.emailEl = React.createRef();
         this.passwordEl = React.createRef();
     }
+
+    static contextType = AuthContext;
     
     submitHandler = e => {
         e.preventDefault();
@@ -44,8 +47,6 @@ class Auth extends Component {
             };
         };
 
-        
-
         fetch('http://localhost:4000/graphql', {
             method: 'POST',
             body: JSON.stringify(requestBody),
@@ -59,8 +60,14 @@ class Auth extends Component {
             }
             return res.json();
         })
-        .then(res => {
-            console.log(res);
+        .then(resData => {
+            if(resData.data.login.token) {
+                this.context.login(
+                    resData.data.login.token,
+                    resData.data.login.userId,
+                    resData.data.login.tokenExpiration
+                );
+            };
         })
         .catch(err => {
             console.log(err);
