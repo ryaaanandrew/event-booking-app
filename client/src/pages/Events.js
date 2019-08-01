@@ -2,6 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import Modal from '../components/Modal';
 import Backdrop from '../components/Backdrop';
 import AuthContext from '../context/auth-context';
+import EventList from '../components/EventList';
 
 const Events = () => {
     const [creating, setCreating] = useState(false);
@@ -119,14 +120,6 @@ const Events = () => {
         });
     };
 
-    const renderEventsList = () => {
-        return events.map(event => {
-            return (
-                <li key={event._id} className='event__list--item'>{event.title}</li>
-            )
-        })
-    };
-
     return (
         <>
         { creating &&  <Backdrop /> }
@@ -164,12 +157,7 @@ const Events = () => {
                 <button onClick={createEventHandler}>Create Event</button>
             </div>
         )}
-        
-
-        <ul className="events__list">
-            <h1>Events List</h1>
-            {renderEventsList()}
-        </ul>   
+            <EventList events={events}/>
         </>
     );
 
