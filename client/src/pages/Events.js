@@ -1,10 +1,12 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import Modal from '../components/Modal';
 import Backdrop from '../components/Backdrop';
 import AuthContext from '../context/auth-context';
 
 const Events = () => {
     const [creating, setCreating] = useState(false);
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     let contextValue = useContext(AuthContext);
 
@@ -12,6 +14,10 @@ const Events = () => {
     const priceRef = useRef();
     const dateRef = useRef();
     const descriptionRef = useRef();
+
+    useEffect(() => {
+        fetchEvents();
+    }, [])
 
     const createEventHandler = () => {
         setCreating(!creating);
@@ -63,16 +69,63 @@ const Events = () => {
             return res.json();
         })
         .then(resData => {
-            console.log(resData)
+            fetchEvents();
         })
         .catch(err => {
-            console.log(err);
+            throw new Error('Error creating new event');
         });
 
-        const event = { title, price, date, description };
+        setCreating(false);
     };
 
+    const fetchEvents = () => {
+        const requestBody = {
+            query: `
+                query {
+                    events {
+                        _id
+                        title
+                        description
+                        price
+                        date
+                        creator {
+                            _id
+                            email
+                        }
+                    }
+                }
+            `
+        };
 
+        fetch('http://localhost:4000/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => {
+            if(res.status !== 200 && res.status !== 201) {
+                throw new Error('failed');
+            }
+            return res.json();
+        })
+        .then(resData => {
+            const events = resData.data.events;
+            setEvents([...events]);
+        })
+        .catch(err => {
+            throw new Error('Error fetching events');
+        });
+    };
+
+    const renderEventsList = () => {
+        return events.map(event => {
+            return (
+                <li key={event._id} className='event__list--item'>{event.title}</li>
+            )
+        })
+    };
 
     return (
         <>
@@ -105,12 +158,18 @@ const Events = () => {
             </Modal> 
         }
         
-        <div>
-            { contextValue.token && (
+        { contextValue.token && (
+            <div className="events-control">
                 <h1>Create your own event!</h1>
                 <button onClick={createEventHandler}>Create Event</button>
-            )}
-        </div>
+            </div>
+        )}
+        
+
+        <ul className="events__list">
+            <h1>Events List</h1>
+            {renderEventsList()}
+        </ul>   
         </>
     );
 
