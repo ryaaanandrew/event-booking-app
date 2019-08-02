@@ -12,7 +12,7 @@ const EventItem = props => {
                 
                 {props.creatorId === props.userId ? 
                     <p>You're the owner of this event</p> :
-                    <button onClick={props.onDetail.bind(this, props.eventId)}>View Details</button> 
+                    <button onClick={(e) => props.onDetail(props.eventId)}>View Details</button> 
                 }
             </div>
         </li>
@@ -20,3 +20,5 @@ const EventItem = props => {
 };
 
 export default EventItem
+
+// props.onDetail.bind(this, props.eventId)

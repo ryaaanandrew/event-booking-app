@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect, usePrevious } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import Modal from '../components/Modal';
 import Backdrop from '../components/Backdrop';
 import AuthContext from '../context/auth-context';
@@ -12,6 +12,7 @@ const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null); 
 
     let contextValue = useContext(AuthContext);
+    const isActive = true;
 
     const titleRef = useRef();
     const priceRef = useRef();
@@ -140,26 +141,64 @@ const Events = () => {
     };
 
     const showDetailHandler = eventId => {
-        console.log('event id: ', eventId)
         const selectedEvent = events.find(e => e._id === eventId);
 
-        console.log('selected event: ', selectedEvent);
         setSelectedEvent(selectedEvent);
     };
 
     const bookEventHandler = () => {
+        if(!contextValue.token) {
+            setSelectedEvent(null);
+            return; 
+        }
 
+        const requestBody = {
+            query: `
+                mutation {
+                    bookEvent(eventId: "${selectedEvent._id}") {
+                        _id
+                        createdAt
+                        updatedAt
+                    }
+                }
+            `
+        };
+
+        fetch('http://localhost:4000/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + contextValue.token
+            }
+        })
+        .then(res => {
+            if(res.status !== 200 && res.status !== 201) {
+                throw new Error('failed');
+            }
+            return res.json();
+        })
+        .then(resData => {
+            console.log(resData);
+            setSelectedEvent(null);
+        })
+        .catch(err => {
+            console.log(err);
+            setLoading(false);
+        });
     };
 
     return (
         <>
-        { creating &&  <Backdrop /> }
+
+        { ( creating || selectedEvent ) &&  <Backdrop /> }
         { creating && 
             <Modal 
                 canConfirm 
                 canCancel 
                 onConfirm={confirmHandler} 
                 onCancel={modalCancelHandler}
+                confirmText='confirm'
             >
                 <form>
                     <div className="form-control">
@@ -188,6 +227,7 @@ const Events = () => {
                 canCancel 
                 onConfirm={bookEventHandler} 
                 onCancel={modalCancelHandler}
+                confirmText={contextValue.token ? 'Book' : 'Confirm'}
             >
                 <h1>{selectedEvent.title}</h1>
                 <h2>{selectedEvent.price}</h2>
