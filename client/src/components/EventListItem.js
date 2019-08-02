@@ -7,11 +7,13 @@ const EventItem = props => {
                 <h1>Title: {props.title}</h1>
                 <h2>Price: {props.price}</h2>
                 <h3>Date: {new Date(props.date).toLocaleDateString('de-DE')}</h3>
-                <h3>Description: {props.description}</h3>
             </div> 
             <div>
                 
-                {props.creatorId === props.userId ? <p>You're the owner of this event</p> : <button>View Details</button> }
+                {props.creatorId === props.userId ? 
+                    <p>You're the owner of this event</p> :
+                    <button onClick={props.onDetail.bind(this, props.eventId)}>View Details</button> 
+                }
             </div>
         </li>
     );

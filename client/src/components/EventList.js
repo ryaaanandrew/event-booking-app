@@ -13,6 +13,7 @@ const EventList = props => {
                 creatorId={event.creator._id}
                 description={event.description}
                 date={event.date}
+                onDetail={props.onViewDetail}
             x/>
         );
     });

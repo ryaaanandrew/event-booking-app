@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState, useRef, useContext, useEffect, usePrevious } from 'react';
 import Modal from '../components/Modal';
 import Backdrop from '../components/Backdrop';
 import AuthContext from '../context/auth-context';
@@ -9,6 +9,7 @@ const Events = () => {
     const [creating, setCreating] = useState(false);
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null); 
 
     let contextValue = useContext(AuthContext);
 
@@ -22,7 +23,12 @@ const Events = () => {
     }, [])
 
     const createEventHandler = () => {
-        setCreating(!creating);
+        setCreating(true);
+    };
+
+    const modalCancelHandler = () => {
+        setCreating(false);
+        setSelectedEvent(null)
     };
 
     const confirmHandler = () => {
@@ -133,6 +139,18 @@ const Events = () => {
         });
     };
 
+    const showDetailHandler = eventId => {
+        console.log('event id: ', eventId)
+        const selectedEvent = events.find(e => e._id === eventId);
+
+        console.log('selected event: ', selectedEvent);
+        setSelectedEvent(selectedEvent);
+    };
+
+    const bookEventHandler = () => {
+
+    };
+
     return (
         <>
         { creating &&  <Backdrop /> }
@@ -141,7 +159,7 @@ const Events = () => {
                 canConfirm 
                 canCancel 
                 onConfirm={confirmHandler} 
-                onCancel={createEventHandler}
+                onCancel={modalCancelHandler}
             >
                 <form>
                     <div className="form-control">
@@ -163,6 +181,20 @@ const Events = () => {
                 </form>
             </Modal> 
         }
+
+        {selectedEvent && (
+            <Modal 
+                canConfirm 
+                canCancel 
+                onConfirm={bookEventHandler} 
+                onCancel={modalCancelHandler}
+            >
+                <h1>{selectedEvent.title}</h1>
+                <h2>{selectedEvent.price}</h2>
+                <h3>Date: {new Date(selectedEvent.date).toLocaleDateString('de-DE')}</h3>
+                <p> description: {selectedEvent.description} </p>
+            </Modal> 
+        )}
         
         { contextValue.token && (
             <div className="events-control">
@@ -173,7 +205,8 @@ const Events = () => {
             { loading ? <Spinner /> :
                 <EventList 
                     events={events} 
-                    authUserId={contextValue.userId} 
+                    authUserId={contextValue.userId}
+                    onViewDetail={showDetailHandler} 
                 />
             }
         </>
