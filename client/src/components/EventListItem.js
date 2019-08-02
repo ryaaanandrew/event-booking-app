@@ -2,13 +2,16 @@ import React from 'react';
 
 const EventItem = props => {
     return (
-        <li key={props.userId} className="event__list--item">
+        <li key={props.eventId} className="event__list--item">
             <div>
-                <h1>{props.title}</h1>
-                <h2>{props.price}</h2>
+                <h1>Title: {props.title}</h1>
+                <h2>Price: {props.price}</h2>
+                <h3>Date: {new Date(props.date).toLocaleDateString('de-DE')}</h3>
+                <h3>Description: {props.description}</h3>
             </div> 
             <div>
-                <button>View Details</button>
+                
+                {props.creatorId === props.userId ? <p>You're the owner of this event</p> : <button>View Details</button> }
             </div>
         </li>
     );

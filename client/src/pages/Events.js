@@ -3,6 +3,7 @@ import Modal from '../components/Modal';
 import Backdrop from '../components/Backdrop';
 import AuthContext from '../context/auth-context';
 import EventList from '../components/EventList';
+import Spinner from '../components/Spinner';
 
 const Events = () => {
     const [creating, setCreating] = useState(false);
@@ -46,10 +47,6 @@ const Events = () => {
                         description
                         price
                         date
-                        creator {
-                            email
-                            _id
-                        }
                     }
                 }
             `
@@ -70,16 +67,30 @@ const Events = () => {
             return res.json();
         })
         .then(resData => {
-            fetchEvents();
-        })
+                setEvents(prevState => {
+                    const updatedEvents = [...prevState];
+                    updatedEvents.push({
+                        _id: resData.data.createEvent._id,
+                        title: resData.data.createEvent.title,
+                        description: resData.data.createEvent.description,
+                        date: resData.data.createEvent.date,
+                        price: resData.data.createEvent.price,
+                        creator: {
+                            _id: contextValue.userId
+                        }
+                    });
+                    return [...updatedEvents];
+                });
+            }
+        )
         .catch(err => {
-            throw new Error('Error creating new event');
+            console.log(err);
         });
-
         setCreating(false);
     };
 
     const fetchEvents = () => {
+        setLoading(true);
         const requestBody = {
             query: `
                 query {
@@ -114,9 +125,11 @@ const Events = () => {
         .then(resData => {
             const events = resData.data.events;
             setEvents([...events]);
+            setLoading(false);
         })
         .catch(err => {
-            throw new Error('Error fetching events');
+            console.log(err);
+            setLoading(false);
         });
     };
 
@@ -157,7 +170,12 @@ const Events = () => {
                 <button onClick={createEventHandler}>Create Event</button>
             </div>
         )}
-            <EventList events={events}/>
+            { loading ? <Spinner /> :
+                <EventList 
+                    events={events} 
+                    authUserId={contextValue.userId} 
+                />
+            }
         </>
     );
 
