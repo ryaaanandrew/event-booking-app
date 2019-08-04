@@ -57,10 +57,51 @@ const Bookings = () => {
         });
     };
 
+    const onDelete = bookingId => {
+        setIsLoading(true);
+
+        const requestBody = {
+            query: `
+                mutation {
+                    cancelBooking(bookingId: "${bookingId}") {
+                        _id
+                        title
+                    }
+                }
+            `
+        };
+
+        fetch('http://localhost:4000/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + context.token
+            }
+        })
+        .then(res => {
+            if(res.status !== 200 && res.status !== 201) {
+                throw new Error('failed');
+            }
+            return res.json();
+        })
+        .then(resData => {
+            const updatedBookings = bookings.filter(booking => {
+                return booking._id !== bookingId;
+            });
+            setBookings([...updatedBookings]);
+            setIsLoading(false);
+        })
+        .catch(err => {
+            console.log(err);
+            setIsLoading(false);
+        });
+    };
+
     return (
         <>
             {
-                isLoading ? <Spinner /> : <BookingList bookings={bookings}/>
+                isLoading ? <Spinner /> : <BookingList bookings={bookings} onDelete={onDelete}/>
             }
         </>
     );
