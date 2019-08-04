@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import authContext from '../context/auth-context';
+import Spinner from '../components/Spinner';    
+import BookingList from '../components/BookingList';
 
 const Bookings = () => {
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [bookings, setBookings] = useState([]);
 
     const context = useContext(authContext);
@@ -12,7 +14,7 @@ const Bookings = () => {
     },[]);
 
     const fetchBookings = () => {
-        setLoading(true);
+        setIsLoading(true);
   
         const requestBody = {
             query: `
@@ -46,21 +48,21 @@ const Bookings = () => {
             return res.json();
         })
         .then(resData => {
-            setBookings([...resData.data.bookings])
+            setBookings([...resData.data.bookings]);
+            setIsLoading(false);
         })
         .catch(err => {
             console.log(err);
+            setIsLoading(false);
         });
     };
 
     return (
-        <ul>
-            {bookings.map(booking => (
-                <li key={booking._id}>
-                    <h1 >{`${booking.event.title} - created at: ${new Date(booking.createdAt).toLocaleDateString()}`}</h1>
-                </li>
-            ))}
-        </ul>
+        <>
+            {
+                isLoading ? <Spinner /> : <BookingList bookings={bookings}/>
+            }
+        </>
     );
 
 };
