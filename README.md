@@ -1,2 +1,8 @@
 # event-booking-app
-an event booking app created with ReactJS, React-routing, Express, bcrypt, json-web-token, GraphQL and MongoDB
+a full responsive event booking app created with React-hooks, React-routing, Express, bcrypt, json-web-token, GraphQL, MongoDB and SCSS
+
+![macbook](https://i.imgur.com/3y3Bbks.png)
+![macbook](https://i.imgur.com/VZuQ5jf.png)
+
+
+
