@@ -153,7 +153,6 @@ const Events = () => {
 
     const showDetailHandler = eventId => {
         const selectedEvent = events.find(e => e._id === eventId);
-
         setSelectedEvent(selectedEvent);
     };
 

@@ -18,6 +18,7 @@ class Auth extends Component {
         e.preventDefault();
         const email = this.emailEl.current.value;
         const password = this.passwordEl.current.value;
+        console.log(password)
 
         if(email.trim().length === 0 || password.trim().length === 0) {
             return;
@@ -95,11 +96,11 @@ class Auth extends Component {
                 <div className='authform__header'><span>{ this.state.isLogIn ? 'Log in' : 'Sign up'}</span></div>
                 <div className="authform__control">
                     <label htmlFor="email">Email</label>
-                    <input type="text" id='email' ref={this.emailEl} />
+                    <input type="text" id='email' ref={this.emailEl} placeholder='Email'/>
                 </div>
                 <div className="authform__control">
                     <label htmlFor="password">Password</label>
-                    <input type="text" id='password' ref={this.passwordEl} />
+                    <input type="password" id='password' ref={this.passwordEl} placeholder='Password'/>
                 </div>
                 <div className="authform__actions">
                 <button type='submit' className="authform__button">Submit</button>

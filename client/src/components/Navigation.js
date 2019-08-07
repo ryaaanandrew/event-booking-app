@@ -23,7 +23,7 @@ const Navigation = () => (
                     </div>
 
                     <div className="main-navigation__legal">
-                        <p>Copyright 2019, all rights resvered</p>
+                        <p>Copyright 2019, all rights reservered</p>
                     </div>
                 </header>
             )

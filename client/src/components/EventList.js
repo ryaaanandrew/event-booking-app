@@ -19,7 +19,10 @@ const EventList = props => {
     });
 
     return (
-        <ul className="event__list">{events}</ul>
+        <div className="events">
+            <div className="events__header"><h1>Events</h1></div>
+            <ul className="events__list">{events}</ul>
+        </div>
     );
 };
 
