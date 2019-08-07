@@ -1,10 +1,10 @@
 .button {
     font-size: 1.6rem;
-    background-color: $primary;
+    background: linear-gradient(315deg, $primary 0%, #4dd115 74%);
     min-width: 6.5rem; 
-    color: white;
+    color: #333;
     text-align: center;
     padding: 1rem 1.5rem;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 2px;
 }

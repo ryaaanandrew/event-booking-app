@@ -5,7 +5,10 @@ $grenze-font: 'Grenze', serif;
 $primary: #42a742;
 $primary-dark: rgb(27, 27, 27);
 
-$shadow: 0px 13px 13px -7px rgba(0, 0, 0, 0.75);
+$primary-grey-light: rgb(204, 204, 204);
+
+$primary-gradient: linear-gradient(315deg, $primary 0%, #4dd115 74%);
+$shadow: 0px 9px 12px -7px rgba(0, 0, 0, 0.5);
 
 * {
     padding: 0;
@@ -23,6 +26,18 @@ a,
 a:visited {
     color: inherit;
     text-decoration: none;
+}
+
+textArea,
+input,
+textarea:focus, 
+input:focus {
+    outline: none;
+    height: 2rem;
+    padding: .5rem 1rem;
+    font-family: $mono-font;
+    font-size: 1.2rem;
+    border: none;
 }
 
 ul li {

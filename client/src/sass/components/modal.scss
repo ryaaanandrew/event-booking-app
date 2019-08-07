@@ -1,18 +1,50 @@
 .modal {
-    width: 90%;
-    background-color: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    color: white;
+    background-color: $primary-dark;
+
     position: fixed;
     top: 20vh;
     left: 5%;
-    border: 1px solid red;
+
+    &__header {
+        background-image: linear-gradient(315deg, $primary 0%, #4dd115 74%);
+        color: black;
+        height: 4rem;
+        font-size: 3rem;
+        padding: 1rem 1.5rem;
+    }
+
+    &__content {
+        background-color: $primary-grey-light;
+        width: 80%;
+        margin: 2rem auto;
+        padding: 3rem 3.5rem;
+        color: black;
+        border-radius: 5px;
+        box-shadow: $shadow;
+        line-height: 2.5rem;
+
+        & p {
+            border-top: 1px solid #333;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            font-size: 1.4rem;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        justify-content: space-evenly;
+    }
 }
 
 @media (min-width: 768px) {
     .modal {
         width: 60rem;
         left: 50%;
-        transform: translateX(-50%);
-        border: 1px solid blue;
+        transform: translateX(-50%); 
     }
 }

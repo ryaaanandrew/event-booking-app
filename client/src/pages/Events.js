@@ -217,21 +217,22 @@ const Events = () => {
                     onConfirm={confirmHandler} 
                     onCancel={modalCancelHandler}
                     confirmText='confirm'
+                    title='Create Event'
                 >
-                    <form>
-                        <div className="form-control">
+                    <form className='createEventForm'>
+                        <div className="createEventForm__control">
                             <label htmlFor="title">Title</label>
                             <input type="text" id='title' ref={titleRef}/>
                         </div>
-                        <div className="form-control">
+                        <div className="createEventForm__control">
                             <label htmlFor="price">Price</label>
                             <input type="number" id='price' ref={priceRef}/>
                         </div>
-                        <div className="form-control">
+                        <div className="createEventForm__control">
                             <label htmlFor="date">Date</label>
                             <input type="datetime-local" id='date' ref={dateRef}/>
                         </div>
-                        <div className="form-control">
+                        <div className="createEventForm__control">
                             <label htmlFor="description">Description</label>
                             <textarea type="text" id='description' rows='4' ref={descriptionRef}/>
                         </div>
@@ -246,18 +247,18 @@ const Events = () => {
                     onConfirm={bookEventHandler} 
                     onCancel={modalCancelHandler}
                     confirmText={contextValue.token ? 'Book' : 'Confirm'}
+                    title={selectedEvent.title}
                 >
-                    <h1>{selectedEvent.title}</h1>
-                    <h2>{selectedEvent.price}</h2>
-                    <h3>Date: {new Date(selectedEvent.date).toLocaleDateString('de-DE')}</h3>
-                    <p> description: {selectedEvent.description} </p>
+                    <h2>Price: ${selectedEvent.price}</h2>
+                    <h2>Date Created: {new Date(selectedEvent.date).toLocaleDateString('de-DE')}</h2>
+                    <p>{selectedEvent.description}</p>
                 </Modal> 
             )}
             
             { contextValue.token && (
-                <div className="events-control">
+                <div className="createEvent">
                     <h1>Create your own event!</h1>
-                    <button onClick={createEventHandler}>Create Event</button>
+                    <div className='button' onClick={createEventHandler}>Create Event</div>
                 </div>
             )}
                 { loading ? <Spinner /> :
