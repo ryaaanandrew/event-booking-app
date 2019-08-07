@@ -1,16 +1,19 @@
 .main-navigation {
     background-color: $primary-dark;
     color: white;
-    width: 17rem;
+    width: 18rem;
+    padding-top: 3rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
-    &__content {
-        height: 50%;
+    @media (max-width: 900px) {
+        width: 100%;
+    }
 
+    &__content {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -18,10 +21,21 @@
 
     &__logo {
         align-self: center;
+        margin-bottom: 3rem;
+
+        & h1 {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+
+            background: $primary-gradient;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
     }
 
     &__items {
-        
+
         & ul li {
             font-size: 1.8rem;
             font-family: $robo-font;
@@ -32,11 +46,19 @@
     }
 
     &__links {
-        width: 7.5rem;
-        padding: 1rem 1.5rem;
-        display: inline-block;
-        background-color: $primary;
-        border-radius: 25px;
+        padding: 1.3rem 1.8rem;
+        border: 1px solid $primary;
+        color: $primary;
+        transition: all .3s ease-out;
+
+        &:hover {
+            background-color: $primary;
+            color: black;
+        }
+
+        @media (max-width: 900px) {
+            padding: 1.3rem 30rem;
+        }
     }
 
     &__legal {
@@ -46,9 +68,13 @@
         padding-bottom: 2rem;
         font-size: 1.3rem;
         padding-bottom: 2rem;
+
+        @media (max-width: 900px) {
+            display: none;
+        }
     }
 }
 
 .active {
-    background-color: rgb(45, 117, 45);
+    // background-color: rgb(45, 117, 45);
 }

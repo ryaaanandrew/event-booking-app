@@ -92,21 +92,30 @@ class Auth extends Component {
 
     render() {
         return (
-            <form className='authform' onSubmit={e => this.submitHandler(e)}>
-                <div className='authform__header'><span>{ this.state.isLogIn ? 'Log in' : 'Sign up'}</span></div>
-                <div className="authform__control">
-                    <label htmlFor="email">Email</label>
-                    <input type="text" id='email' ref={this.emailEl} placeholder='Email'/>
+            <div className='auth'>
+                <div className="auth__left">
+                    <img className="auth__images auth__images--1" src="https://i.imgur.com/VZuQ5jf.png" alt="iphone"/>
+                    <img className="auth__images auth__images--2" src="https://i.imgur.com/3y3Bbks.png" alt="macbook"/>
                 </div>
-                <div className="authform__control">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id='password' ref={this.passwordEl} placeholder='Password'/>
+
+                <div className="auth__right">
+                    <form className='authform' onSubmit={e => this.submitHandler(e)}>
+                        <div className='authform__header'><span>{ this.state.isLogIn ? 'Log in' : 'Sign up'}</span></div>
+                        <div className="authform__control">
+                            <label htmlFor="email">Email</label>
+                            <input type="text" id='email' ref={this.emailEl} placeholder='Email'/>
+                        </div>
+                        <div className="authform__control">
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id='password' ref={this.passwordEl} placeholder='Password'/>
+                        </div>
+                        <div className="authform__actions">
+                            <button type='submit' className="button">Submit</button>
+                            <button type='button' onClick={this.switchModeHandler} className="button">{ this.state.isLogIn ? 'Sign up' : 'Log in'}</button>
+                        </div>
+                    </form>
                 </div>
-                <div className="authform__actions">
-                <button type='submit' className="authform__button">Submit</button>
-                <button type='button' onClick={this.switchModeHandler} className="authform__button">{ this.state.isLogIn ? 'Sign up' : 'Log in'}</button>
-                </div>
-            </form>
+            </div>     
         );
     };
 };

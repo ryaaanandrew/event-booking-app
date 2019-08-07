@@ -1,23 +1,65 @@
-.authform {
-    background-color: rgb(235, 235, 235);
-    color: black;
-    width: 35%;
-    border-radius: 5px;
+.auth {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    &__right {
+        min-width: 60rem;
+        align-self: center;
+    }
+
+    &__left {
+        @media (max-width: 1280px) {
+            display: none;
+        }
+    }
+
+    &__images {
+        width: 40rem;
+
+        &--1 {
+            position: relative;
+            top: 20%;
+            left: -30%;
+        }
+        &--2 {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+        }
+    }
+
+
+}
+
+
+.authform {
+    background-color: $primary-dark;
+    color: $primary-grey-light;
+    width: 85%;
+    height: 50%;
+    border-radius: 5px;
+    box-shadow: $shadow;
 
     display: flex;
     flex-direction: column;
     justify-content: space-around; 
     align-items: center;
 
+    @media (max-width: 900px) {
+        position: initial;
+        top: 0;
+        left: 0;
+        transform: none;
+        
+        width: 95%;
+        margin: 0 auto;
+    }
+
     &__header {
         padding: 1rem 0;
         margin-bottom: 2rem;
-        background-color: $primary-dark;
+        background: $primary-gradient;
         width: 100%;
         height: 5rem;
         display: flex;
@@ -26,7 +68,7 @@
         border-radius: 5px 5px 0 0;
 
         & > span {
-            color: white;
+            color: black;
             font-size: 3rem;
             text-transform: uppercase; 
         }
@@ -56,16 +98,13 @@
         
         display: flex;
         justify-content: space-between;
-    }
 
-    &__button {
-        font-size: 1.6rem;
-        background-color: $primary;
-        min-width: 6.5rem; 
-        color: white;
-        text-align: center;
-        padding: 1rem 1.5rem;
-        cursor: pointer;
-        border-radius: 20px;
+        @media (max-width: 1280px) {
+            flex-direction: column;
+
+            & > button {
+                margin-bottom: 2rem;
+            }
+        }
     }
 }

@@ -1,17 +1,25 @@
 .modal {
     color: white;
     background-color: $primary-dark;
+    border-radius: 5px;
 
     position: fixed;
     top: 20vh;
     left: 5%;
 
+    @media (max-width: 600px) {
+        top: 25vh;
+        left: 7vh;
+        width: 80%;
+    }
+
     &__header {
-        background-image: linear-gradient(315deg, $primary 0%, #4dd115 74%);
+        background-image: $primary-gradient;
         color: black;
         height: 4rem;
         font-size: 3rem;
         padding: 1rem 1.5rem;
+        border-radius: 5px 5px 0 0;
     }
 
     &__content {
@@ -29,6 +37,10 @@
             margin-top: 2rem;
             padding-top: 2rem;
             font-size: 1.4rem;
+        }
+
+        @media (max-width: 600px) {
+            width: 75%;
         }
     }
 

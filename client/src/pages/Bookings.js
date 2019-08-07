@@ -102,11 +102,12 @@ const Bookings = () => {
     };
 
     return (
-        <>
+        <div className='bookings'>
+            <div className="bookings__header"><h1>Your Bookings</h1></div>
             {
                 isLoading ? <Spinner /> : <BookingList bookings={bookings} onDelete={onDelete}/>
             }
-        </>
+        </div>
     );
 
 };

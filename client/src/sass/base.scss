@@ -2,12 +2,13 @@ $mono-font: 'Montserrat', sans-serif;
 $robo-font: 'Roboto', sans-serif;
 $grenze-font: 'Grenze', serif;
 
-$primary: #42a742;
-$primary-dark: rgb(27, 27, 27);
+$primary: #B06AB3;
+$primary-dark: rgb(20, 20, 20);
+$primary-dark-2: rgb(32, 32, 32);
 
-$primary-grey-light: rgb(204, 204, 204);
+$primary-grey-light: rgb(235, 235, 235);
 
-$primary-gradient: linear-gradient(315deg, $primary 0%, #4dd115 74%);
+$primary-gradient: linear-gradient(to right, #B06AB3, #4568DC);
 $shadow: 0px 9px 12px -7px rgba(0, 0, 0, 0.5);
 
 * {
@@ -20,6 +21,10 @@ html {
     font-family: sans-serif;
     font-size: 62.5%;
     font-family: $robo-font;
+    background-color: black;
+    background-image: url('https://i.imgur.com/wsw3HGm.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 a,
@@ -40,12 +45,22 @@ input:focus {
     border: none;
 }
 
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 ul li {
     list-style-type: none;
 }
 
 .wrapper {
-    background-color: #333;
+    background-color: $primary-dark-2;
     height: 95vh;
     width: 95%;
     margin: 3rem auto;
@@ -55,16 +70,27 @@ ul li {
     -webkit-box-shadow: $shadow;
     -moz-box-shadow: $shadow;
     box-shadow: $shadow;
+
+    @media (max-width: 900px) {
+        margin: 0;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
 }
 
 .main-content {
     width: 100%;
     color: white;
     padding: 2rem 2.5rem;
-
     position: relative;
+    overflow: scroll;
 
-    background: #333;  /* fallback for old browsers */
-    // background: -webkit-linear-gradient(to right, #1b1b1b, #333);
-    // background: linear-gradient(to right, #1b1b1b, #333);
+    background-color: $primary-dark-2;
+
+    @media (max-width: 900px) {
+        text-align: center;
+    }
 }

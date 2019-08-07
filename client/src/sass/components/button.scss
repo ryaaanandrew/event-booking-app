@@ -1,10 +1,21 @@
 .button {
     font-size: 1.6rem;
-    background: linear-gradient(315deg, $primary 0%, #4dd115 74%);
+    background: $primary;
     min-width: 6.5rem; 
-    color: #333;
+    color: white;
     text-align: center;
     padding: 1rem 1.5rem;
     cursor: pointer;
     border-radius: 2px;
+    transition: all .3s ease-out;
+    box-shadow: $shadow;
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+
+    &:active {
+        transform: translateY(0px);
+        box-shadow: none;
+    }
 }

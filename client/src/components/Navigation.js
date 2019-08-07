@@ -10,13 +10,13 @@ const Navigation = () => (
                 <header className='main-navigation'>
                     <div className="main-navigation__content">
                         <div className="main-navigation__logo">
-                            <h1>Logo</h1>
+                            <h1>Bookings</h1>
                         </div>
                         <nav className="main-navigation__items">
                             <ul>
-                                {!context.token && <li><NavLink to='/auth' className='main-navigation__links'>Log in</NavLink></li>}
-                                <li><NavLink to='/events' className='main-navigation__links'>Events</NavLink></li>
-                                {context.token && <li><NavLink to='/bookings' className='main-navigation__links'>Bookings</NavLink></li>}
+                                {!context.token && <li><div className='main-navigation__links'><NavLink to='/auth'>Log in</NavLink></div></li>}
+                                <li><div className='main-navigation__links'><NavLink to='/events'>Events</NavLink></div></li>
+                                {context.token && <li><div className='main-navigation__links'><NavLink to='/bookings'>Bookings</NavLink></div></li>}
                                 {context.token && <li><div onClick={context.logout} className='main-navigation__links'>Log out</div></li>}
                             </ul>
                         </nav>

@@ -1,0 +1,44 @@
+.bookings {
+    background-color: $primary-dark;
+    border-radius: 5px;
+
+    box-shadow: $shadow;
+
+    &__header {
+        border-radius: 5px 5px 0 0;
+        font-size: 2.2rem;
+        padding: 1.5rem 2rem;
+        background: $primary-gradient;
+
+        & h1 {
+            font-weight: normal;
+            color: $primary-dark;
+        }
+    }
+
+}
+
+.bookingsList {
+    width: 90%;
+    margin: 0 auto;
+    padding: 2.5rem 0;
+    overflow: scroll;
+
+    &__item {
+        padding: 1.5rem 2rem;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & h1 {
+            letter-spacing: .2rem;
+            padding-bottom: .4rem;
+            margin-bottom: 1rem;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+    }
+}
