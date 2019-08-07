@@ -1,0 +1,55 @@
+$mono-font: 'Montserrat', sans-serif;
+$robo-font: 'Roboto', sans-serif;
+$grenze-font: 'Grenze', serif;
+
+$primary: #42a742;
+$primary-dark: rgb(27, 27, 27);
+
+$shadow: 0px 13px 13px -7px rgba(0, 0, 0, 0.75);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 62.5%;
+    font-family: $robo-font;
+}
+
+a,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.wrapper {
+    background-color: #333;
+    height: 95vh;
+    width: 95%;
+    margin: 3rem auto;
+
+    display: flex;
+
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+.main-content {
+    width: 100%;
+    color: white;
+    padding: 2rem 2.5rem;
+
+    position: relative;
+
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1b1b1b, #333);
+    background: linear-gradient(to right, #1b1b1b, #333);
+}

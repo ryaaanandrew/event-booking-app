@@ -21,21 +21,23 @@ const App = () => {
     };
 
     return (
-        <BrowserRouter>
-            <AuthContext.Provider value={{ token: token, userId: userId, login: login, logout: logout }}>
-            <Navigation/>
-                <main className='main-content'>
-                    <Switch>
-                        {token && <Redirect from='/' to='/events' exact />}
-                        {token && <Redirect from='/auth' to='/events' exact />}
-                        {!token && <Route path='/auth' component={AuthPage} />}
-                        <Route path='/events' component={EventsPage} />
-                        {token && <Route path='/bookings' component={BookingPage} />}
-                        {!token && <Redirect to='/auth' exact />}
-                    </Switch>
-                </main>
-            </AuthContext.Provider>
-        </BrowserRouter>
+        <div className='wrapper'>
+            <BrowserRouter>
+                <AuthContext.Provider value={{ token: token, userId: userId, login: login, logout: logout }}>
+                    <Navigation/>
+                    <div className="main-content">
+                        <Switch>
+                            {token && <Redirect from='/' to='/events' exact />}
+                            {token && <Redirect from='/auth' to='/events' exact />}
+                            {!token && <Route path='/auth' component={AuthPage} />}
+                            <Route path='/events' component={EventsPage} />
+                            {token && <Route path='/bookings' component={BookingPage} />}
+                            {!token && <Redirect to='/auth' exact />}
+                        </Switch>
+                    </div>
+                </AuthContext.Provider>
+            </BrowserRouter>
+        </div>
     );
 };
 

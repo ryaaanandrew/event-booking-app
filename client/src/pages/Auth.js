@@ -92,18 +92,18 @@ class Auth extends Component {
     render() {
         return (
             <form className='authform' onSubmit={e => this.submitHandler(e)}>
-                <h1>{ this.state.isLogIn ? 'Log in' : 'Sign up'}</h1>
+                <div className='authform__header'><span>{ this.state.isLogIn ? 'Log in' : 'Sign up'}</span></div>
                 <div className="authform__control">
                     <label htmlFor="email">Email</label>
                     <input type="text" id='email' ref={this.emailEl} />
                 </div>
                 <div className="authform__control">
-                    <label htmlFor="password">password</label>
+                    <label htmlFor="password">Password</label>
                     <input type="text" id='password' ref={this.passwordEl} />
                 </div>
                 <div className="authform__actions">
-                <button type='submit'>Submit</button>
-                <button type='button' onClick={this.switchModeHandler}>Switch to { this.state.isLogIn ? 'Sign up' : 'Log in'}</button>
+                <button type='submit' className="authform__button">Submit</button>
+                <button type='button' onClick={this.switchModeHandler} className="authform__button">{ this.state.isLogIn ? 'Sign up' : 'Log in'}</button>
                 </div>
             </form>
         );
